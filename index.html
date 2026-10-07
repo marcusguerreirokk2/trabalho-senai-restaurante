@@ -38,7 +38,7 @@
         <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
     </div>
 
-    
+    <p id="erroEmail"></p>
 
     <div class="senha">
         
@@ -71,7 +71,7 @@
     </p>
     </div>
     <Script>
-        
+
     let mostrar = document.getElementById("mostrar");
     let senhaOculta = document.getElementById("senha");
     let confirmarOculta = document.getElementById("confirmar-senha");
@@ -144,6 +144,7 @@
         let erroNome = document.getElementById("erronome");
         let senhaIgual = document.getElementById("senhaigual");
         let erroCpf = document.getElementById("errocpf");
+        let erroEmail = document.getElementById("erroEmail");
 
         
         if (nome.length < 3) {
@@ -179,9 +180,31 @@
         } else {
             senhaIgual.textContent = "";
         }
+        
+    function validarEmail(email) {
+    const regex = /^[^\s@]+@gmail\.com$/;
+    const regex2 = /^[^\s@]+@hotmail\.com$/;
+    const regex3 = /^[^\s@]+@yahoo\.com$/;
+    const regex4 = /^[^\s@]+@outlook\.com$/;
+    const regex5 = /^[^\s@]+@icloud\.com$/;
+    const regex6 = /^[^\s@]+@proton\.me$/;
+        if (regex.test(email) || regex2.test(email) || regex3.test(email) || regex4.test(email) || regex5.test(email) || regex6.test(email)) {
+            return true;
+        } else {
+            return false;
+        }
+    return regex.test(email);
+}
 
         
-        if (erroNome.textContent === "" && erroCpf.textContent === "" && erroSenha.textContent === "" && senhaIgual.textContent === "") {
+         if (!validarEmail(email)) {
+            erroEmail.textContent = "O e-mail tem que ser válido.";
+            erroEmail.style.color = "white";
+        } else {
+            erroEmail.textContent = "";
+        }
+        
+        if (erroNome.textContent === "" && erroCpf.textContent === "" && erroSenha.textContent === "" && senhaIgual.textContent === "" && erroEmail.textContent === "") {
             let dados = {
                 CPF: cpf,
                 Nome: nome,
